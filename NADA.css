@@ -1,4 +1,4 @@
-img {
+#pic {
     margin: 5px;
     position: relative;
     -webkit-animation-name: example;
@@ -26,5 +26,9 @@ img {
 
 .img-container {
     margin: 100px auto;
-    width: 60%;
+    width: 100%;
+}
+body {
+
+    background-image: url(space.jpg);
 }
