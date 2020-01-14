@@ -1,6 +1,6 @@
 .introImg{
     position: relative;
-    cursor: url(fork-image4.png) 4 12,auto;
+    cursor: url("../images/fork-image4.png") 4 12,auto;
 
 }
 .username{
@@ -17,7 +17,7 @@
     box-shadow: white 1;
     color: white;
     font-size: 17px;
-    cursor: url(fork-image4.png) 4 12,auto;
+    cursor: url("../images/fork-image4.png") 4 12,auto;
 
 }
 #newPlayer{

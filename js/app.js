@@ -7,7 +7,7 @@ function ReapetImage(howManyTimes) {
     let picture = document.getElementById('pic')
     dgag.length=howManyTimes;
     for (let i = 0; i < howManyTimes; i++) {
-        picture.innerHTML += "<img src='imgs/chicken.png' alt='chicken' id='chicken'>"
+        picture.innerHTML += "<img src='images/chicken.png' alt='chicken' id='chicken'>"
     }
 }
 // console.log(input);

@@ -47,15 +47,16 @@
     text-align: center;
 }
 body {
-
-    background-image: url("../imgs/sss.jpg");
+    margin: 0;
+    padding: 0;
+    background-image: url("../images/space.jpg");
     position: relative;
     box-sizing: border-box;
     width: 1400px;
     height: 400px;
 }
 #hero {
-    background-image: url("../imgs/player.png");
+    background-image: url("../images/player.png");
     width: 98px;
     height: 75px;
     position: absolute;
@@ -64,7 +65,7 @@ body {
 }
 
 .fire{
-    background-image: url("../imgs/fire.png");
+    background-image: url("../images/fire.png");
     width:13px;
     height:54px;
     position: absolute;
