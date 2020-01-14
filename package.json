@@ -1,0 +1,22 @@
+{
+  "name": "checken-invaders",
+  "version": "1.0.0",
+  "description": "CHECKEN INVADERS Game",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Malkibrahim/Chicken-inavaders.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Malkibrahim/Chicken-inavaders/issues"
+  },
+  "homepage": "https://github.com/Malkibrahim/Chicken-inavaders#readme",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}

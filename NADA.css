@@ -2,7 +2,7 @@
     margin: 5px;
     position: relative;
     -webkit-animation-name: example;
-    -webkit-animation-duration: 8s;
+    -webkit-animation-duration: 10s;
     -webkit-animation-iteration-count: infinite;
     -webkit-box-direction: alternate;
 }
@@ -25,10 +25,16 @@
         }
 
 .img-container {
-    margin: 100px auto;
-    width: 100%;
+    /* margin: 100px auto;
+    width: 100%; */
+    
+    width: 60%;
+    margin-top: 100px;
+    margin-left: 15%;
 }
 body {
+    margin: 0;
+    padding: 0;
 
     background-image: url(space.jpg);
 }

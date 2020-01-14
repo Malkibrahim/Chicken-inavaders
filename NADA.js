@@ -6,5 +6,5 @@ function ReapetImage (howManyTimes){
     }
 }
 
-ReapetImage(80);
+ReapetImage(45);
 
