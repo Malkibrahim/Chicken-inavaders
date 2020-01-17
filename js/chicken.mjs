@@ -15,6 +15,9 @@ const State = {
  lastTime : Date.now(),
 
 }
+export function first(){
+    console.log("yarb t4t8l")
+}
 const currentTime = Date.now();
 const dt = (currentTime - State.lastTime) / 1000;
 console.log(dt);
@@ -26,7 +29,7 @@ function SetPosition(el , x, y){
     el.style.transform = `translate${x}px,${y}px`;
 }
 
-function CreateChicken($container , x , y){
+export function CreateChicken($container , x , y){
     let $elemnt= document.createElement( "img");
     $elemnt.src = 'chicken.png';
     $elemnt.className='chichen';

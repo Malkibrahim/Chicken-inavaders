@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Malkibrahim/Chicken-inavaders#readme",
   "dependencies": {
+    "http-server": "^0.12.1",
     "jquery": "^3.4.1"
   },
   "devDependencies": {}

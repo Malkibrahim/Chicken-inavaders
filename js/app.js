@@ -1,7 +1,4 @@
-// let hero = { top: 640, left: 640 };
-// let fire = [];
-// let dgag=[];
-// let input = document.getElementById("hero");
+import {first} from './chicken.mjs'
 const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
@@ -21,6 +18,8 @@ var gameState ={
     spacePressed:false
 
 }
+first();
+
 function setPosition(el,x,y){
     el.style.transform = `translate(${x}px, ${y}px)`;
 }
