@@ -1,36 +1,36 @@
-const KEY_CODE_LEFT = 37;
-const KEY_CODE_RIGHT = 39;
-const KEY_CODE_SPACE = 32;
+const keyCodeLeft = 37;
+const keyCodeRight = 39;
+const keyCodeSpace = 32;
 
-const GAME_WIDTH = 800;
-const GAME_HEIGHT = 600;
+const gameWidth = 800;
+const gameHieght = 600;
 
-const PLAYER_WIDTH = 20;
-const PLAYER_MAX_SPEED = 600.0;
-const LASER_MAX_SPEED = 300.0;
-const LASER_COOLDOWN = 0.5;
+const shapeWidth = 50;
+const shapeSpeed = 600.0;
+const laserSpeed = 300.0;
+const laserSlowing = 0.5;
 
-const ENEMIES_PER_ROW = 10;
-const ENEMY_HORIZONTAL_PADDING = 80;
-const ENEMY_VERTICAL_PADDING = 70;
-const ENEMY_VERTICAL_SPACING = 80;
-const ENEMY_COOLDOWN = 5.0;
+const chickenPerRow = 10;
+const chickenHorizntalPadding = 80;
+const chickenVirticalPadding = 70;
+const chickenSpace = 80;
+const chickenSlowDown = 5.0;
 
-const GAME_STATE = {
+const generalState = {
   lastTime: Date.now(),
   leftPressed: false,
   rightPressed: false,
   spacePressed: false,
-  playerX: 0,
-  playerY: 0,
-  playerCooldown: 0,
+  shipX: 0,
+  shipY: 0,
+  shipCooldown: 0,
   lasers: [],
-  enemies: [],
-  enemyLasers: [],
+  chickens: [],
+  chickenLasers: [],
   gameOver: false
 };
 
-function rectsIntersect(r1, r2) {
+function intersection(r1, r2) {
   return !(
     r2.left > r1.right ||
     r2.right < r1.left ||
@@ -43,7 +43,7 @@ function setPosition(el, x, y) {
   el.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-function clamp(v, min, max) {
+function maxAndMin(v, min, max) {
   if (v < min) {
     return min;
   } else if (v > max) {
@@ -51,7 +51,7 @@ function clamp(v, min, max) {
   } else {
     return v;
   }
-}
+} 
 
 function rand(min, max) {
   if (min === undefined) min = 0;
@@ -59,19 +59,20 @@ function rand(min, max) {
   return min + Math.random() * (max - min);
 }
 
-function createPlayer($container) {
-  GAME_STATE.playerX = GAME_WIDTH / 2;
-  GAME_STATE.playerY = GAME_HEIGHT - 50;
-  const $player = document.createElement("img");
-  $player.src = "img/player.png";
-  $player.className = "player";
-  $container.appendChild($player);
-  setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
+function createShip($container) {
+  generalState.shipX = gameWidth / 2;
+  generalState.shipY = gameHieght - 50;
+  const $ship = document.createElement("img");
+  $ship.src = "img/player.png";
+  $ship.className = "ship";
+  $ship.width = shapeWidth;
+  $container.appendChild($ship);
+  setPosition($ship, generalState.shipX, generalState.shipY);
 }
 
-function destroyPlayer($container, player) {
-  $container.removeChild(player);
-  GAME_STATE.gameOver = true;
+function destroyShip($container, ship) {
+  $container.removeChild(ship);
+  generalState.gameOver = true;
   const audio = new Audio("sound/sfx-lose.ogg");
   audio.play();
 }
@@ -82,54 +83,54 @@ function createLaser($container, x, y) {
   $element.className = "laser";
   $container.appendChild($element);
   const laser = { x, y, $element };
-  GAME_STATE.lasers.push(laser);
+  generalState.lasers.push(laser);
   const audio = new Audio("sound/sfx-laser1.ogg");
   audio.play();
   setPosition($element, x, y);
 }
 
-function updatePlayer(dt, $container) {
-  if (GAME_STATE.leftPressed) {
-    GAME_STATE.playerX -= dt * PLAYER_MAX_SPEED;
+function updateship(dt, $container) {
+  if (generalState.leftPressed) {
+    generalState.shipX -= dt * shapeSpeed;
   }  
-  if (GAME_STATE.rightPressed) {
-    GAME_STATE.playerX += dt * PLAYER_MAX_SPEED;
+  if (generalState.rightPressed) {
+    generalState.shipX += dt * shapeSpeed;
   }  
 
-  GAME_STATE.playerX = clamp(
-    GAME_STATE.playerX,
-    PLAYER_WIDTH,
-    GAME_WIDTH - PLAYER_WIDTH
+  generalState.shipX = maxAndMin(
+    generalState.shipX,
+    shapeWidth,
+    gameWidth - shapeWidth
   );  
 
-  if (GAME_STATE.spacePressed && GAME_STATE.playerCooldown <= 0) {
-    createLaser($container, GAME_STATE.playerX, GAME_STATE.playerY);
-    GAME_STATE.playerCooldown = LASER_COOLDOWN;
+  if (generalState.spacePressed && generalState.shipCooldown <= 0) {
+    createLaser($container, generalState.shipX, generalState.shipY);
+    generalState.shipCooldown = laserSlowing;
   }  
-  if (GAME_STATE.playerCooldown > 0) {
-    GAME_STATE.playerCooldown -= dt;
+  if (generalState.shipCooldown > 0) {
+    generalState.shipCooldown -= dt;
   }  
 
-  const player = document.querySelector(".player");
-  setPosition(player, GAME_STATE.playerX, GAME_STATE.playerY);
+  const ship = document.querySelector(".ship");
+  setPosition(ship, generalState.shipX, generalState.shipY);
 }  
 
 function updateLasers(dt, $container) {
-  const lasers = GAME_STATE.lasers;
+  const lasers = generalState.lasers;
   for (let i = 0; i < lasers.length; i++) {
     const laser = lasers[i];
-    laser.y -= dt * LASER_MAX_SPEED;
+    laser.y -= dt * laserSpeed;
     if (laser.y < 0) {
       destroyLaser($container, laser);
     }
     setPosition(laser.$element, laser.x, laser.y);
     const r1 = laser.$element.getBoundingClientRect();
-    const enemies = GAME_STATE.enemies;
-    for (let j = 0; j < enemies.length; j++) {
-      const enemy = enemies[j];
+    const chickens = generalState.chickens;
+    for (let j = 0; j < chickens.length; j++) {
+      const enemy = chickens[j];
       if (enemy.isDead) continue;
       const r2 = enemy.$element.getBoundingClientRect();
-      if (rectsIntersect(r1, r2)) {
+      if (intersection(r1, r2)) {
         // Enemy was hit
         destroyEnemy($container, enemy);
         destroyLaser($container, laser);
@@ -137,7 +138,7 @@ function updateLasers(dt, $container) {
       }
     }
   }
-  GAME_STATE.lasers = GAME_STATE.lasers.filter(e => !e.isDead);
+  generalState.lasers = generalState.lasers.filter(e => !e.isDead);
 }
 
 function destroyLaser($container, laser) {
@@ -145,38 +146,38 @@ function destroyLaser($container, laser) {
   laser.isDead = true;
 }
 
-function createEnemy($container, x, y) {
+function createChicken($container, x, y) {
   const $element = document.createElement("img");
   $element.src = "img/chicken.png";
   $element.className = "enemy";
   $container.appendChild($element);
-  const enemy = {
+  const chicken = {
     x,
     y,
-    cooldown: rand(0.5, ENEMY_COOLDOWN),
+    cooldown: rand(0.5, chickenSlowDown),
     $element
   };
-  GAME_STATE.enemies.push(enemy);
+  generalState.chickens.push(chicken);
   setPosition($element, x, y);
 }
 
-function updateEnemies(dt, $container) {
-  const dx = Math.sin(GAME_STATE.lastTime / 1000.0) * 50;
-  const dy = Math.cos(GAME_STATE.lastTime / 1000.0) * 10;
+function updateChicken(dt, $container) {
+  const dx = Math.sin(generalState.lastTime / 1000.0) * 50;
+  const dy = Math.cos(generalState.lastTime / 1000.0) * 10;
 
-  const enemies = GAME_STATE.enemies;
-  for (let i = 0; i < enemies.length; i++) {
-    const enemy = enemies[i];
+  const chickens = generalState.chickens;
+  for (let i = 0; i < chickens.length; i++) {
+    const enemy = chickens[i];
     const x = enemy.x + dx;
     const y = enemy.y + dy;
     setPosition(enemy.$element, x, y);
     enemy.cooldown -= dt;
     if (enemy.cooldown <= 0) {
-      createEnemyLaser($container, x, y);
-      enemy.cooldown = ENEMY_COOLDOWN;
+      createChickenLaser($container, x, y);
+      enemy.cooldown = chickenSlowDown;
     }
   }
-  GAME_STATE.enemies = GAME_STATE.enemies.filter(e => !e.isDead);
+  generalState.chickens = generalState.chickens.filter(e => !e.isDead);
 }
 
 function destroyEnemy($container, enemy) {
@@ -184,98 +185,98 @@ function destroyEnemy($container, enemy) {
   enemy.isDead = true;
 }
 
-function createEnemyLaser($container, x, y) {
+function createChickenLaser($container, x, y) {
   const $element = document.createElement("img");
   $element.src = "img/egg3.png";
   $element.className = "enemy-laser";
   $container.appendChild($element);
   const laser = { x, y, $element };
-  GAME_STATE.enemyLasers.push(laser);
+  generalState.chickenLasers.push(laser);
   setPosition($element, x, y);
 }
 
 function updateEnemyLasers(dt, $container) {
-  const lasers = GAME_STATE.enemyLasers;
+  const lasers = generalState.chickenLasers;
   for (let i = 0; i < lasers.length; i++) {
     const laser = lasers[i];
-    laser.y += dt * LASER_MAX_SPEED;
-    if (laser.y > GAME_HEIGHT) {
+    laser.y += dt * laserSpeed;
+    if (laser.y > gameHieght) {
       destroyLaser($container, laser);
     }
     setPosition(laser.$element, laser.x, laser.y);
     const r1 = laser.$element.getBoundingClientRect();
-    const player = document.querySelector(".player");
-    const r2 = player.getBoundingClientRect();
-    if (rectsIntersect(r1, r2)) {
-      // Player was hit
-      destroyPlayer($container, player);
+    const ship = document.querySelector(".ship");
+    const r2 = ship.getBoundingClientRect();
+    if (intersection(r1, r2)) {
+      // ship was hit
+      destroyShip($container, ship);
       break;
     }
   }
-  GAME_STATE.enemyLasers = GAME_STATE.enemyLasers.filter(e => !e.isDead);
+  generalState.chickenLasers = generalState.chickenLasers.filter(e => !e.isDead);
 }
 
 
 function init() {
   const $container = document.querySelector(".game");
-  createPlayer($container);
+  createShip($container);
 
-  const enemySpacing = (GAME_WIDTH - ENEMY_HORIZONTAL_PADDING * 2) / (ENEMIES_PER_ROW - 1);
+  const enemySpacing = (gameWidth - chickenHorizntalPadding * 2) / (chickenPerRow - 1);
   for (let j = 0; j < 3; j++) {
-    const y = ENEMY_VERTICAL_PADDING + j * ENEMY_VERTICAL_SPACING;
-    for (let i = 0; i < ENEMIES_PER_ROW; i++) {
-      const x = i * enemySpacing + ENEMY_HORIZONTAL_PADDING;
-      createEnemy($container, x, y);
+    const y = chickenVirticalPadding + j * chickenSpace;
+    for (let i = 0; i < chickenPerRow; i++) {
+      const x = i * enemySpacing + chickenHorizntalPadding;
+      createChicken($container, x, y);
     }
   }
 }
 
-function playerHasWon() {
-  return GAME_STATE.enemies.length === 0;
+function shipHasWon() {
+  return generalState.chickens.length === 0;
 }
 
 function update(e) {
   // console.log
   const currentTime = Date.now();
-  const dt = (currentTime - GAME_STATE.lastTime) / 1000.0;
+  const dt = (currentTime - generalState.lastTime) / 1000.0;
   console.log(dt);
-  if (GAME_STATE.gameOver) {
+  if (generalState.gameOver) {
     document.querySelector(".game-over").style.display = "block";
     return;
   }
 
-  if (playerHasWon()) {
+  if (shipHasWon()) {
     document.querySelector(".congratulations").style.display = "block";
     return;
   }
 
   const $container = document.querySelector(".game");
-  updatePlayer(dt, $container);
+  updateship(dt, $container);
   updateLasers(dt, $container);
-  updateEnemies(dt, $container);
+  updateChicken(dt, $container);
   updateEnemyLasers(dt, $container);
 
-  GAME_STATE.lastTime = currentTime;
+  generalState.lastTime = currentTime;
   window.requestAnimationFrame(update);
 }
 
 function onKeyDown(e) {
-  if (e.keyCode === KEY_CODE_LEFT) {
-    GAME_STATE.leftPressed = true;
-  } else if (e.keyCode === KEY_CODE_RIGHT) {
-    GAME_STATE.rightPressed = true;
-  } else if (e.keyCode === KEY_CODE_SPACE) {
-    GAME_STATE.spacePressed = true;
+  if (e.keyCode === keyCodeLeft) {
+    generalState.leftPressed = true;
+  } else if (e.keyCode === keyCodeRight) {
+    generalState.rightPressed = true;
+  } else if (e.keyCode === keyCodeSpace) {
+    generalState.spacePressed = true;
   }
 }
 
 function onKeyUp(e) {
-  if (e.keyCode === KEY_CODE_LEFT) {
-    GAME_STATE.leftPressed = false;
-  } else if (e.keyCode === KEY_CODE_RIGHT) {
-    GAME_STATE.rightPressed = false;
-  } else if (e.keyCode === KEY_CODE_SPACE) {
-    GAME_STATE.spacePressed = false;
+  if (e.keyCode === keyCodeLeft) {
+    generalState.leftPressed = false;
+  } else if (e.keyCode === keyCodeRight) {
+    generalState.rightPressed = false;
+  } else if (e.keyCode === keyCodeSpace) {
+    generalState.spacePressed = false;
   }
 }
 
