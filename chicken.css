@@ -1,0 +1,20 @@
+body {
+
+    background-image: url(space.jpg);
+}
+.game {
+    width: 900px;
+    height: 800;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.container {
+    display: flex;
+    justify-content: center;
+}
+.chichen {
+    width: 50px;
+    padding: 20px;
+}
