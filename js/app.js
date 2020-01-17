@@ -7,8 +7,8 @@ const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
 const player_width=20;
 
-const GAME_WIDTH = 1000;
-const GAME_HEIGHT = 600;
+const GAME_WIDTH = 900;
+const GAME_HEIGHT = 650;
 var container = document.getElementById('hero');
 
 var gameState ={
@@ -73,7 +73,7 @@ console.log('aaaaa');
 
 }
 function init(){
-    debugger;
+    // debugger;
 creatSpace();
 
 }

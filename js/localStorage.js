@@ -18,7 +18,7 @@ $("#contBtn").hover(function(){
 
 })
 $("#newPlayer").click(function(){
-    debugger;
+    // debugger;
     
     var userName =$('#name').val();
    

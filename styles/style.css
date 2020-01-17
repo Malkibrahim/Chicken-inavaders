@@ -1,71 +1,30 @@
-#pic {
-    
-    margin: 5px;
-    position: absolute;
-    -webkit-animation-name: example;
-    -webkit-animation-duration: 8s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-box-direction: alternate;
-}
 
-#chicken {
-    width: 60px;
-    height: 55px;
-    padding: 1%;
-}
-
-@-webkit-keyframes example {
-    0% {
-        left: 15px;
-        top: 20px;
-    }
-    
-    25% {
-        left: 100px;
-        top: 50px;
-    }
-    
-    50% {
-        left: 100px;
-        top: 10px;
-    }
-    
-    75% {
-        left: 10px;
-        top: 100px;
-    }
-    
-    100% {
-        left: 15px;
-        top: 20px;
-    }
-}
-
-.img-container {
-    margin: 100px auto;
-    width: 100%;
-    text-align: center;
-}
 body {
-    margin: 0;
-    padding: 0;
-    background-image: url("../images/space.jpg");
-    position: relative;
-    box-sizing: border-box;
-   
+
+    background-image: url('../images/space.jpg');
+
+}
+.game {
+    width: 900px;
+    height: 800;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.container {
+    display: flex;
+    justify-content: center;
+}
+.chichen {
+    width: 50px;
+    padding: 20px;
 }
 #hero {
     background-image: url("../images/player.png");
     width: 98px;
     height: 75px;
     position: absolute;
-    /* top: 640px;
-    left: 640px; */
+   
 }
 
-.fire{
-    background-image: url("../images/fire.png");
-    width:13px;
-    height:54px;
-    position: absolute;
-}
