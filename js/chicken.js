@@ -3,10 +3,11 @@ console.log('connected')
 const game_width = 900;
 const game_height = 800;
 
-const chicken_horizontal_padding = 20;
-const chicken_vertical_height = 70;
-const chicken_vertical_padding = 60;
-var chicken_per_row = 9;
+const chicken_width = 50;
+const chicken_horizontal_padding = 40;
+const chicken_height = 70;
+const chicken_vertical_padding = 20;
+var chicken_per_row = 12;
 var row = 3;
 
 const State = {
@@ -18,6 +19,8 @@ const currentTime = Date.now();
 const dt = (currentTime - State.lastTime) / 1000;
 console.log(dt);
 GameStart();
+UpdateChichen(dt);
+window.requestAnimationFrame(UpdateChichen);
 // update();
 function SetPosition(el , x, y){
     el.style.transform = `translate${x}px,${y}px`;
@@ -57,14 +60,14 @@ function UpdateChichen (dt){
 function GameStart (){
 const $container = document.querySelector('.game');
 
-const chicken_width =
-game_width - (chicken_horizontal_padding *2) / (chicken_per_row - 1);
+//const chicken_width =
+//game_width - (chicken_horizontal_padding *2) / (chicken_per_row - 1);
 for(let i = 0 ; i < row ; i++)
 {
-    const y = i * chicken_vertical_height + chicken_vertical_padding;
+    const y = i * chicken_height + chicken_vertical_padding;
     for(let j=0 ; j < chicken_per_row ; j++ )
     {
-        const x = j * chicken_width +chicken_horizontal_padding; 
+        const x = j * (chicken_width + chicken_horizontal_padding); 
         CreateChicken($container , x ,y);
     }
 }
