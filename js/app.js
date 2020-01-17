@@ -25,6 +25,7 @@ function setPosition(el,x,y){
     el.style.transform = `translate(${x}px, ${y}px)`;
 }
 function creatSpace(){
+  debugger;
     gameState.playerX= GAME_WIDTH/2;
     gameState.playery=GAME_HEIGHT -50;
     setPosition(container,gameState.playerX,gameState.playery);
@@ -61,13 +62,13 @@ function keyUp(e){
 function updateShip(dt){
 console.log(gameState.l);
     if(gameState.leftPressed){
-console.log('aaaaa');
         gameState.playerX-=dt*600.0;
 
-    }else if(gameState.rightPressed){
+    }
+     if(gameState.rightPressed){
         gameState.playerX+=dt*600.0;
     }
-    limits(gameState.playerX,GAME_WIDTH,GAME_WIDTH-player_width);
+    gameState.playerX = limits(gameState.playerX,-700,700);
         setPosition(container,gameState.playerX,gameState.playery);
 
 
