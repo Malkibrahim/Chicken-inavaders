@@ -8,10 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://use.fontawesome.com/3ee71ef1c8.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
     <link rel="stylesheet" href="styles/styleMalak.css">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+    <div class="intro">
+        <img class="introImg" src="./images/introBackground1.jpg" alt=""  width="100%" height="670px">
+    <div  class="username" id="title">Chicken Invaders!</div>
+    <input class="username" id="name" type="text">
+    <button class="username fork" id="newPlayer">New Game</button>
+    <button  class="username fork" id="contBtn">Continue</button>
+    <div  class="username hide" id="warning">This Player Already exist !</div>
+
+    </div>
+    
+ <div class="whole hide">  
 <!-- <img src="space.jpg" alt="backgroung image"> -->
 <div class="scores">
     <i class="fa fa-bolt"><span class="num" id="score">0</span></i>
@@ -23,10 +35,14 @@
 <div class="img-container">
     <div id="pic"></div>
     <!-- <button>Level Up!</button> -->
-    <div id="hero"></div>
+    <div class="container" id="hero"></div>
     <div id="fires"></div>
 </div>
+<div class="upgrade hide">
+    <span class="gameStatus"> Level UP </span>
+</div>
 
+</div> 
     <!-- <script src="NADA.js"></script> -->
     <script src="js/app.js"></script>
     <script src="js/main.js"></script>

@@ -52,16 +52,15 @@ body {
     background-image: url("../images/space.jpg");
     position: relative;
     box-sizing: border-box;
-    width: 1400px;
-    height: 400px;
+   
 }
 #hero {
     background-image: url("../images/player.png");
     width: 98px;
     height: 75px;
     position: absolute;
-    top: 640px;
-    left: 640px;
+    /* top: 640px;
+    left: 640px; */
 }
 
 .fire{

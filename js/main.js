@@ -1,15 +1,8 @@
-// class User{
-//     constructor(name ,score,lives){
-//         this.name=name;
-//         this.score=score;
-//         this.lives=lives;
-//     }
-// }
-var score=$('#score').html();
-var lives =$('#lives').html();
-var rockets=$('#rocket').html();
+
+var score=$('#score').text();
+var lives =$('#lives').text();
+var rockets=$('#rocket').text();
 var i=0;
-var arr=[];
 console.log('hii');
 $("#newPlayer").hover(function(){
     $("#newPlayer").css("color","white")
@@ -25,24 +18,31 @@ $("#contBtn").hover(function(){
 
 })
 $("#newPlayer").click(function(){
+    debugger;
     
-    var userName =$('.username').val();
-    var score=$('#score').html(0);
-    var lives =$('#lives').html(0);
-    var rockets=$('#rocket').html(0);
-    // var user =new User(userName,score,lives,rockets);
- //   console.log(userName);
+    var userName =$('#name').val();
+   
  
     localStorage.setItem("Name",userName);
-    localStorage.setItem("score",score);
-    localStorage.setItem("lives",lives);
-    localStorage.setItem("rockets",rockets);
+    localStorage.setItem("score",0);
+    localStorage.setItem("lives",0);
+    localStorage.setItem("rockets",0);
+    $('.intro').addClass('hide')
+    $('.whole').removeClass('hide');
+
 
 })
 $('#contBtn').click(function(){
     localStorage.setItem("score",score);
     localStorage.setItem("lives",lives);
     localStorage.setItem("rockets",rockets);
-
-
+    $('.intro').addClass('hide')
+    $('.whole').removeClass('hide');
 })
+
+///////////////////Level ups ///////////////////////
+function LevelUp(){
+    
+}
+
+
