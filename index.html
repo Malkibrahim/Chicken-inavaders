@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>nada&Menna</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://use.fontawesome.com/3ee71ef1c8.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="./node_modules/jquery/dist/jquery.js"></script>
-    <link rel="stylesheet" href="styles/intro.css">
-    <link rel="stylesheet" href="styles/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Game</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
 </head>
+
 <body>
-    <div class="intro">
-        <img class="introImg" src="./images/introBackground1.jpg" alt=""  width="100%" height="670px">
-    <div  class="username" id="title">Chicken Invaders!</div>
+  <div class="intro">
+    <img class="introImg" src="./img/introBackground1.jpg" alt="" width="100%" height="670px">
+    <div class="username" id="title">Chicken Invaders!</div>
     <input class="username" id="name" type="text">
     <button class="username fork" id="newPlayer">New Game</button>
-    <button  class="username fork" id="contBtn">Continue</button>
-    <div  class="username hide" id="warning">This Player Already exist !</div>
+    <button class="username fork" id="contBtn">Continue</button>
+    <div class="username hide" id="warning">This Player Already exist !</div>
 
-    </div>
-    
- <div class="whole hide">  
-<div class="scores">
-    <i class="fa fa-bolt"><span class="num" id="score">0</span></i>
-    <i  class="fa fa-heart"><span class="num" id="lives" >0</span></i>
-    <i  class="fa fa-rocket"><span class="num" id="rocket" >0</span></i>
+  </div>
 
-</div>
-    <div class="container" >
+  <div class="whole hide">
+    <div class="wrap">
+      <header>Space Game</header>
+      <div class="game-wrapper">
+        <div class="scores">
+          <i class="fa fa-bolt"><span class="num" id="score">0</span></i>
+          <i class="fa fa-heart"><span class="num" id="lives">0</span></i>
+          <i class="fa fa-rocket"><span class="num" id="rocket">0</span></i>
+        </div>
         <div class="game"></div>
-        <!-- <div class="container" id="hero"></div> -->
-        <!-- <div class="fire"></div> -->
-        </div >
-        
-   
-<div class="upgrade hide">
-    <span class="gameStatus"> Level UP </span>
-</div>
+        <div class="congratulations">
+          <h1>Congratulations!</h1>
+          <h2>You won the game</h2>
+          <button class="btn" onclick="window.location.reload()">Restart</button>
+        </div>
+        <div class="game-over">
+          <h1>GAME OVER</h1>
+          <h2>You lost the game</h2>
+          <button class="btn" onclick="window.location.reload()">Restart</button>
+        </div>
+      </div>
+      <footer>Left/right keys to move, spacebar to shoot</footer>
+    </div>
+  </div>
 
-</div> 
-<script src="js/localStorage.js"></script>
-<script src="js/chicken.mjs"></script>
-<script type="module" src="js/menna.js"></script>
-<!-- <script type="module" src="js/app.js"></script> -->
+  <script src="js/game.js"></script>
+  <script src="js/localStorage.js"></script>
 </body>
+
 </html>
