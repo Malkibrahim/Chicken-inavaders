@@ -16,7 +16,7 @@ const chickenVirticalPadding = 70;
 const chickenSpace = 80;
 const chickenSlowDown = 5.0;
 
-const generalState = {
+export const generalState = {
   lastTime: Date.now(),
   leftPressed: false,
   rightPressed: false,
@@ -27,9 +27,41 @@ const generalState = {
   lasers: [],
   chickens: [],
   chickenLasers: [],
+  destroyEnemys:[],
+  laserLimit:100,
+  score:0,
+  lives:5,
   gameOver: false
 };
-$('#newPlayer').click(function(){
+$('#newPlayer').click(introButtons);
+$('#contBtn').click(introButtons);
+
+export var score;
+export var lives;
+export var rockets;
+function introButtons(){
+  score =$('#score');
+   lives =$('#lives');
+   rockets =$('#rocket');
+  // export{generalState,score,lives,rockets}
+// module.exports ={score,lives,rockets};
+  // document.querySelector('.btnConttainer').addEventListener(function(e){
+      if (this==document.getElementById('newPlayer')){
+        generalState.score=0;
+        generalState.lives=5;
+        generalState.laserLimit=100;
+        generalState.destroyEnemys=[];
+       console.log(this==document.getElementById('newPlayer'));}
+        else if(this== document.getElementById('contBtn')){
+         generalState.destroyEnemys=localStorage.getItem("deadEnemy")
+         $('#score').text(localStorage.getItem('score'));
+         $('#lives').text(localStorage.getItem('lives')); 
+         $('#rocket').text(localStorage.getItem('rockets'));
+          
+         console.log(this);
+        } 
+      
+  // })
 
   function intersection(r1, r2) {
     return !(
@@ -74,6 +106,9 @@ $('#newPlayer').click(function(){
     function destroyShip($container, ship) {
       $container.removeChild(ship);
       generalState.gameOver = true;
+      generalState.lives--;
+      lives.text(generalState.lives);
+      console.log(generalState.lives);
       const audio = new Audio("sound/sfx-lose.ogg");
       audio.play();
     }
@@ -88,6 +123,10 @@ $('#newPlayer').click(function(){
       const audio = new Audio("sound/sfx-laser1.ogg");
       audio.play();
       setPosition($element, x, y);
+      // debugger;
+      generalState.laserLimit--;
+      rockets.text(generalState.laserLimit);
+      console.log(generalState.laserLimit);
     }
     
     function updateship(dt, $container) {
@@ -143,7 +182,11 @@ $('#newPlayer').click(function(){
       }
       
       function destroyLaser($container, laser) {
-        $container.removeChild(laser.$element);
+       $container.removeChild(laser.$element);
+      //  generalState.destroyEnemys.push(desroyed.cssText)
+      //  console.log(destroyed.style.cssText);
+
+     
         laser.isDead = true;
       }
       
@@ -159,7 +202,11 @@ $('#newPlayer').click(function(){
           $element
         };
         generalState.chickens.push(chicken);
-        setPosition($element, x, y);
+        // setPosition($element, x, y);
+        if (!generalState.destroyEnemys.includes(`translate(${x}px, ${y}px)`)){
+
+          $element.style.transform = `translate(${x}px, ${y}px)`;
+        }
       }
       
       function updateChicken(dt, $container) {
@@ -182,7 +229,12 @@ $('#newPlayer').click(function(){
       }
       
       function destroyEnemy($container, enemy) {
-        $container.removeChild(enemy.$element);
+      var desroyed=  $container.removeChild(enemy.$element);
+        generalState.destroyEnemys.push(desroyed.style.cssText);
+        console.log(generalState.destroyEnemys);
+       generalState.score+=5;
+       score.text(generalState.score);
+       console.log(generalState.score);
         enemy.isDead = true;
       }
       
@@ -240,7 +292,7 @@ $('#newPlayer').click(function(){
         // console.log
         const currentTime = Date.now();
         const dt = (currentTime - generalState.lastTime) / 1000.0;
-        console.log(dt);
+
         if (generalState.gameOver) {
           document.querySelector(".game-over").style.display = "block";
           return;
@@ -287,5 +339,7 @@ $('#newPlayer').click(function(){
       window.addEventListener("keyup", onKeyUp);
       
       window.requestAnimationFrame(update);
-      
-    })
+      localStorage.setItem("score",score.text());
+      localStorage.setItem("lives",lives.text());
+      localStorage.setItem("rockets",rockets.text());
+    }

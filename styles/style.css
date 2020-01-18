@@ -22,10 +22,17 @@ body {
     padding-top: 20px;
 }
 #hero {
-    background-image: url("../images/player.png");
+    /* background-image: url("../images/player.png"); */
     width: 98px;
     height: 75px;
     position: absolute;
    
+}
+.fire{
+    /* background-image: url("../images/player.png"); */
+
+    width: 13px;
+    height: 54px;
+    position: absolute;
 }
 
