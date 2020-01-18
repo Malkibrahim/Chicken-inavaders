@@ -43,20 +43,25 @@ function introButtons(){
   score =$('#score');
    lives =$('#lives');
    rockets =$('#rocket');
-  // export{generalState,score,lives,rockets}
-// module.exports ={score,lives,rockets};
-  // document.querySelector('.btnConttainer').addEventListener(function(e){
+  
       if (this==document.getElementById('newPlayer')){
-        generalState.score=0;
-        generalState.lives=5;
-        generalState.laserLimit=100;
+        localStorage.setItem('score',generalState.score);
+        localStorage.setItem('lives',generalState.lives);
+        localStorage.setItem('rockets',generalState.laserLimit);
+        score.text(generalState.score);
+        lives.text(generalState.lives);
+        rockets.text(generalState.laserLimit);
+
         generalState.destroyEnemys=[];
        console.log(this==document.getElementById('newPlayer'));}
         else if(this== document.getElementById('contBtn')){
          generalState.destroyEnemys=localStorage.getItem("deadEnemy")
-         $('#score').text(localStorage.getItem('score'));
-         $('#lives').text(localStorage.getItem('lives')); 
-         $('#rocket').text(localStorage.getItem('rockets'));
+         $('#score').text(parseInt(localStorage.getItem('score')));
+         $('#lives').text(parseInt(localStorage.getItem('lives'))); 
+         $('#rocket').text(parseInt(localStorage.getItem('rockets')));
+         generalState.score=parseInt(localStorage.getItem('score'));
+         generalState.lives=parseInt(localStorage.getItem('lives'))
+         generalState.laserLimit=parseInt(localStorage.getItem('rockets'));
           
          console.log(this);
         } 
@@ -108,6 +113,9 @@ function introButtons(){
       generalState.gameOver = true;
       generalState.lives--;
       lives.text(generalState.lives);
+      if(generalState.lives<parseInt(localStorage.getItem('lives'))){
+        localStorage.setItem('lives',generalState.lives);
+      }
       console.log(generalState.lives);
       const audio = new Audio("sound/sfx-lose.ogg");
       audio.play();
@@ -126,6 +134,9 @@ function introButtons(){
       // debugger;
       generalState.laserLimit--;
       rockets.text(generalState.laserLimit);
+      if(generalState.laserLimit<parseInt(localStorage.getItem('rockets'))){
+        localStorage.setItem('rockets',generalState.laserLimit);
+      }
       console.log(generalState.laserLimit);
     }
     
@@ -230,10 +241,13 @@ function introButtons(){
       
       function destroyEnemy($container, enemy) {
       var desroyed=  $container.removeChild(enemy.$element);
-        generalState.destroyEnemys.push(desroyed.style.cssText);
-        console.log(generalState.destroyEnemys);
+        // generalState.destroyEnemys.push(desroyed.style.cssText);
+        // console.log(generalState.destroyEnemys);
        generalState.score+=5;
        score.text(generalState.score);
+      //  if(generalState.score>parseInt(localStorage.getItem('score'))){
+        localStorage.setItem('score',generalState.score);
+      // }
        console.log(generalState.score);
         enemy.isDead = true;
       }
@@ -339,7 +353,6 @@ function introButtons(){
       window.addEventListener("keyup", onKeyUp);
       
       window.requestAnimationFrame(update);
-      localStorage.setItem("score",score.text());
-      localStorage.setItem("lives",lives.text());
-      localStorage.setItem("rockets",rockets.text());
+      // console.log(score.text());
+``
     }
