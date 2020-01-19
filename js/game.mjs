@@ -15,7 +15,7 @@ let chickenPerRow = 10;
 const chickenHorizntalPadding = 80;
 const chickenVirticalPadding = 70;
 const chickenSpace = 80;
-const chickenSlowDown = 20.0;
+let chickenSlowDown = 20.0;
 
 export const generalState = {
   lastTime: Date.now(),
@@ -29,7 +29,7 @@ export const generalState = {
   chickens: [],
   chickenLasers: [],
   destroyEnemys: [],
-  laserLimit: 100,
+  laserLimit: 30,
   score: 0,
   lives: 3,
   gameOver: false
@@ -135,8 +135,11 @@ function introButtons() {
     }
     console.log(generalState.lives);
   }
-  function createNewLevel(container, ship,x) {
+  function createNewLevel(container, ship,x,y) {
     generalState.laserLimit = generalState.laserLimit*2;
+    rockets.text(generalState.laserLimit);
+
+    chickenSlowDown-=y;
     container.removeChild(ship);
     // createShip($container);
   }
@@ -334,7 +337,7 @@ function introButtons() {
     if (generalState.gameOver) {
       document.querySelector(".game-over").style.display = "block";
        generalState.score=0;
-    generalState.lives=3;
+    generalState.lives=4;
     generalState.laserLimit=100;
     row=1;
     localStorage.setItem('score', generalState.score);
@@ -385,8 +388,11 @@ function introButtons() {
     $('.congratulations').hide();
     const container = document.querySelector(".game");
     const ship = document.querySelector(".ship");
-    createNewLevel(container, ship,20);
-    row = row + 1;
+    createNewLevel(container, ship,20,3);
+    if(row <=6){
+
+      row = row + 1;
+    }
     if (row>parseInt(localStorage.getItem('level'))){
       localStorage.setItem('level',row);
     }
