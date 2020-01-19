@@ -53,9 +53,5 @@ $('#contBtn').click(function(){
 
 })
 
-///////////////////Level ups ///////////////////////
-function LevelUp(){
-    
-}
 
 

@@ -11,5 +11,14 @@
   "dependencies": {
     "http-server": "^0.12.1",
     "jquery": "^3.4.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Malkibrahim/Chicken-inavaders.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Malkibrahim/Chicken-inavaders/issues"
+  },
+  "homepage": "https://github.com/Malkibrahim/Chicken-inavaders#readme"
 }

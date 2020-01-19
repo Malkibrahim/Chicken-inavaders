@@ -7,55 +7,53 @@
   <title>Space Game</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/intro.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.js"></script>
 </head>
 
 <body>
   <div class="intro">
-    <img class="introImg" src="./img/introBackground1.jpg" alt=""  width="100%" height="670px">
-    <div  class="username" id="title">Chicken Invaders!</div>
+    <img class="introImg" src="./img/introBackground1.jpg" alt="" width="100%" height="670px">
+    <div class="username" id="title">Chicken Invaders!</div>
     <input class="username" id="name" type="text">
     <div class="btnConttainer">
-      
+
       <button class="username fork" id="newPlayer">New Game</button>
-      <button  class="username fork" id="contBtn">Continue</button>
+      <button class="username fork" id="contBtn">Continue</button>
     </div>
-    <div  class="username hide" id="warning">This Player Already exist !</div>
-    
+    <div class="username hide" id="warning">This Player Already exist !</div>
+
   </div>
-  
-  <div class="whole hide">  
-    <div class="scores">
-      <i class="fa fa-bolt"><span class="num" id="score" onchange="upd()">0</span></i>
-      <i  class="fa fa-heart"><span class="num" id="lives"  onchange="upd()" >0</span></i>
-      <i  class="fa fa-rocket"><span class="num" id="rocket"  onchange="upd()">0</span></i>
-      
+
+  <div class="whole hide">
+    <div class="wrap">
+      <header>Space Game</header>
+      <div class="scores">
+        <i class="fa fa-bolt"><span class="num" id="score" onchange="upd()">0</span></i>
+        <i class="fa fa-heart"><span class="num" id="lives" onchange="upd()">0</span></i>
+        <i class="fa fa-rocket"><span class="num" id="rocket" onchange="upd()">0</span></i>
+      </div>
+      <div class="game-wrapper">
+        <div class="game"></div>
+        <div class="congratulations">
+          <h2>You won this level</h2>
+          <button class="btn" id="levelup">Level up</button>
+          <!-- <button class="btn" onclick="LevelUp()">Level up</button> -->
+        </div>
+        <div class="game-over">
+          <h1>GAME OVER</h1>
+          <h2>You lost the game</h2>
+          <button class="btn" onclick="window.location.reload()">Restart</button>
+        </div>
+      </div>
+      <footer>Left/right keys to move, spacebar to shoot</footer>
     </div>
-    <div class="upgrade hide">
-      <div class="gameStatus">LevelUp</div>
-    </div>
-    </div>
-  <div class="wrap">
-    <!-- <header>Space Game</header> -->
-    <div class="game-wrapper">
-      <div class="game"></div>
-      <!-- <div class="congratulations">
-        <h1>Congratulations!</h1>
-        <h2>You won the game</h2>
-      </div> -->
-      <!-- <button class="btn" onclick="window.location.reload()">Restart</button>
-       <div class="game-over"> -->
-        <!-- <h1>GAME OVER</h1>
-          <h2>You lost the game</h2> -->
-        <!-- <button class="btn" onclick="introButtons()">Restart</button>
-        </div> 
-      </div> -->
-      <!-- <footer>Left/right keys to move, spacebar to shoot</footer> -->
-    </div>
-    <!-- <script src="js/game.mjs"></script> -->
-    <script type="module" src="js/localStorage.js"></script>
-  </body>
-  
+  </div>
+  <!-- <script src="js/game.mjs"></script> -->
+  <script type="module" src="js/localStorage.js"></script>
+</body>
+
 </html>
 <!-- =======
 <!DOCTYPE html>
