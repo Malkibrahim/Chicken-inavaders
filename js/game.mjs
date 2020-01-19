@@ -34,6 +34,9 @@ export const generalState = {
   lives: 3,
   gameOver: false
 };
+
+
+
 $('#newPlayer').click(introButtons);
 $('#contBtn').click(introButtons);
 
@@ -41,6 +44,7 @@ export var score;
 export var lives;
 export var rockets;
 function introButtons() {
+
   score = $('#score');
   lives = $('#lives');
   rockets = $('#rocket');

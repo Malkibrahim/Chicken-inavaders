@@ -20,14 +20,12 @@ $("#contBtn").hover(function(){
 })
 $("#newPlayer").click(function(){
   arr=   generalState.destroyEnemys;
-
-  var userName =$('#name').val();
-//   var obj={
-//     'name':userName.val(),
-//     'score':score.text(),
-//     'lives':lives.text(),
-//     'rockets':rockets.text()
-// }
+  var userName;
+  
+  do {
+    userName =$('#name').val();
+     }while(userName!=null);
+ 
   
 window.localStorage.setItem("Name",userName);
 //  window.localStorage.setItem("score",score.text());
